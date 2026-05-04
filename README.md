@@ -1,1 +1,1 @@
-# PrivEsc-ReverseHTTP-Android-or-Web-
+# PrivEsc + ReverseHTTP (Android or Web)
